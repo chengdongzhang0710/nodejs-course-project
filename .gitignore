@@ -131,6 +131,7 @@ dist
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+*.code-workspace
 
 # System Files
 .DS_Store
