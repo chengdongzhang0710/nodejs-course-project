@@ -10,8 +10,7 @@ const User = require('../models/user');
 const transporter = nodemailer.createTransport(
     sendgridTransport({
         auth: {
-            api_key:
-                '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',
+            api_key: 'SENDGRID_API_KEY',
         },
     })
 );
@@ -159,12 +158,12 @@ exports.postSignup = (req, res, next) => {
         })
         .then(() => {
             res.redirect('/login');
-            // return transporter.sendMail({
-            //     to: email,
-            //     from: 'chdzhang@umich.edu',
-            //     subject: 'Signup Succeeded!',
-            //     html: '<h1>You successfully signed up!</h1>',
-            // });
+            return transporter.sendMail({
+                to: email,
+                from: 'chdzhang@umich.edu',
+                subject: 'Signup Succeeded!',
+                html: '<h1>You successfully signed up!</h1>',
+            });
         })
         .catch((err) => {
             const error = new Error(err);
