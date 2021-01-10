@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 
 const express = require('express');
@@ -10,6 +11,7 @@ const flash = require('connect-flash');
 const multer = require('multer');
 const helmet = require('helmet');
 const compression = require('compression');
+const morgan = require('morgan');
 
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
@@ -55,8 +57,14 @@ const fileFilter = (req, file, cb) => {
 
 app.set('view engine', 'ejs');
 
+const accessLogStream = fs.createWriteStream(
+    path.join(__dirname, 'access.log'),
+    { flags: 'a' }
+);
+
 app.use(helmet());
 app.use(compression());
+app.use(morgan('combined', { stream: accessLogStream }));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
