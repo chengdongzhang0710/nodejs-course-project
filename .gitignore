@@ -136,3 +136,6 @@ dist
 # System Files
 .DS_Store
 Thumbs.db
+
+# Storage Files
+images/
