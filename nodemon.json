@@ -1,0 +1,10 @@
+{
+    "env": {
+        "MONGO_USER": "user",
+        "MONGO_PASSWORD": "password",
+        "MONGO_HOST": "localhost://27017",
+        "MONGO_DEFAULT_DATABASE": "nodejs_course_project",
+        "STRIPE_KEY": "stripe_api_key",
+        "SENDGRID_KEY": "sendgrid_api_key"
+    }
+}

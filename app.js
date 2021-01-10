@@ -16,7 +16,7 @@ const authRoute = require('./routes/auth');
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
-const MONGODB_URI = 'mongodb://localhost:27017/nodejs-course-project';
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DEFAULT_DATABASE}`;
 
 const app = express();
 const store = new MongoDBStore({
@@ -30,7 +30,12 @@ const fileStorage = multer.diskStorage({
         cb(null, 'images');
     },
     filename: (req, file, cb) => {
-        cb(null, new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname);
+        cb(
+            null,
+            new Date().toISOString().replace(/:/g, '-') +
+                '-' +
+                file.originalname
+        );
     },
 });
 
@@ -108,7 +113,7 @@ app.use((error, req, res, next) => {
 mongoose
     .connect(MONGODB_URI)
     .then(() => {
-        app.listen(3000);
+        app.listen(process.env.PORT || 3000);
     })
     .catch((err) => {
         console.log(err);
